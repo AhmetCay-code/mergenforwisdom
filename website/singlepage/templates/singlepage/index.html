@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Single Page</title>
+        <script>
+
+            //  This function communicates with django (backend)
+            
+            function showSection(section) {   
+                fetch(`/sections/${section}`)
+                .then(response => response.text())
+                .then(text => {
+                    console.log(text);
+                    document.querySelector('#content').innerHTML = text;
+                });
+
+            }
+
+
+            document.addEventListener("DOMContentLoaded", function() {
+                document.querySelectorAll('button').forEach(button => {
+                    button.onclick = function() {
+                        showSection(this.dataset.section)
+                    }
+                })
+            });
+
+
+        </script>
+    </head>
+    <body>
+        <h1>Welcome! Predictions for Today : 16.04.2023</h1>
+        <table style="width:100%">
+            <tr>
+              <th>Spain</th>
+              <th>Spain</th>
+              <th>Spain</th>
+              <th>Spain</th>
+              <th>Spain</th>
+            </tr>
+            <tr>
+              <td><button data-section="1">Match 1</button></td>
+              <td><button data-section="2">Match 2</button></td>
+              <td><button data-section="3">Match 3</button></td>
+              <td><button data-section="4">Match 4</button></td>
+              <td><button data-section="5">Match 5</button></td>
+            </tr>
+            <tr>
+                <td><button data-section="6">Match 6</button></td>
+                <td><button data-section="7">Match 7</button></td>
+                <td><button data-section="8">Match 8</button></td>
+                <td><button data-section="9">Match 9</button></td>
+                <td><button data-section="10">Match 10</button></td>
+            </tr>
+          </table>
+
+        <!-- Contents loaded from server is inserted here by javascript -->
+        <div id="content">
+
+        </div>
+    
+    </body>
+</html>
